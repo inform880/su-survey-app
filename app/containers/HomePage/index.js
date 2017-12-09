@@ -10,14 +10,24 @@
  */
 
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
-import messages from './messages';
+// import { FormattedMessage } from 'react-intl';
+import { apiKey } from './apikey';
+// import messages from './messages';
+import { createTournament } from './actions';
+
+const challonge = require('challonge');
 
 export default class HomePage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   render() {
+    const client = challonge.createClient({
+      apiKey: apiKey.key,
+    });
+    console.log(apiKey);
     return (
       <h1>
-        <FormattedMessage {...messages.header} />
+        <button onClick={() => createTournament(client)}>
+          Create Tournament
+        </button>
       </h1>
     );
   }
